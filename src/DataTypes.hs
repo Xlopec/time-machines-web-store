@@ -1,4 +1,6 @@
 {-# OPTIONS_GHC -Wall #-}
+{-# LANGUAGE ViewPatterns #-}
+{-# LANGUAGE RecordWildCards #-}
 
 module DataTypes where
 
@@ -19,7 +21,12 @@ data Gender
   deriving (Show)
 
 data TimeMachine =
-  TimeMachine Integer String Float TravelDirection
+  TimeMachine
+    { i :: Integer
+    , name :: String
+    , price :: Float
+    , direction :: TravelDirection
+    }
   deriving (Show)
 
 data TravelDirection
@@ -33,6 +40,15 @@ clientName client =
     GovOrg name -> name
     Company name _ _ _ -> name
     Individual (Person firstName lastName _) _ -> firstName ++ " " ++ lastName
+
+responsibility :: Client -> String
+responsibility (Company _ _ _ r) = r
+responsibility _ = "Unknown"
+
+specialClient :: Client -> Bool
+specialClient (clientName -> "Max Oliinyk") = True
+specialClient (responsibility -> "Director") = True
+specialClient _ = False
 
 -- Returns number of client for a given gender
 genderStatistics :: [Client] -> Gender -> Integer
@@ -55,6 +71,4 @@ plus _ _ = 0
 -- applies percentage discount to a list of time machines
 applyDiscount :: [TimeMachine] -> Integer -> [TimeMachine]
 applyDiscount [] _ = []
-applyDiscount (TimeMachine i name price direction:xs) discount = TimeMachine i name priceWithDiscount direction : applyDiscount xs discount
-  where
-    priceWithDiscount = price - (price * (fromIntegral discount / 100.0))
+applyDiscount (m@TimeMachine {..}:xs) discount = m {price = price - (price * (fromIntegral discount / 100.0))} : applyDiscount xs discount
