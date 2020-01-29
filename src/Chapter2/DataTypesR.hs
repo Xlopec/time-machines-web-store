@@ -1,6 +1,6 @@
 {-# OPTIONS_GHC -Wall #-}
 
-module DataTypes where
+module Chapter2.DataTypesR where
 
 data ClientR
   = GovOrgR
