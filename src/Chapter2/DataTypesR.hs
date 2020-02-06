@@ -1,4 +1,5 @@
 {-# OPTIONS_GHC -Wall #-}
+{-# LANGUAGE NamedFieldPuns #-}
 
 module Chapter2.DataTypesR where
 
@@ -23,3 +24,8 @@ data PersonR =
     , lastName :: String
     }
   deriving (Show)
+
+clientNameR :: ClientR -> String
+clientNameR GovOrgR {clientRName} = clientRName
+clientNameR CompanyR {clientRName} = clientRName
+clientNameR IndividualR { person = PersonR { firstName, lastName } } = firstName ++ " " ++ lastName

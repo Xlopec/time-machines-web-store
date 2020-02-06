@@ -1,3 +1,3 @@
-Simple web application that allows to sold time machines
+Simple web application that sells time machines
 
 This application is practical part of "Practical Haskell"
