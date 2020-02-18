@@ -1,7 +1,5 @@
-*.iml
-.idea
 .stack-work/
-chapter2.cabal
+PracticalHaskell.cabal
 *~
 dist
 dist-*
@@ -27,3 +25,4 @@ cabal.project.local~
 .ghc.environment.*
 *.lock
 out/
+.idea/

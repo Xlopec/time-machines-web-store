@@ -1,3 +1,3 @@
-# Changelog for chapter2
+# Changelog for PracticalHaskell
 
 ## Unreleased changes
