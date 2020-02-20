@@ -1,0 +1,73 @@
+cabal-version: 1.12
+
+-- This file has been generated from package.yaml by hpack version 0.31.2.
+--
+-- see: https://github.com/sol/hpack
+--
+-- hash: 6e4f6497866dbaa9c229bff4ebde3f40283b8f187dd7fa305f2fdf230d518e71
+
+name:           PracticalHaskell
+version:        0.1.0.0
+description:    Please see the README on GitHub at <https://github.com/githubuser/PracticalHaskell#readme>
+homepage:       https://github.com/githubuser/PracticalHaskell#readme
+bug-reports:    https://github.com/githubuser/PracticalHaskell/issues
+author:         Author name here
+maintainer:     example@example.com
+copyright:      2020 Author name here
+license:        BSD3
+license-file:   LICENSE
+build-type:     Simple
+extra-source-files:
+    README.md
+    ChangeLog.md
+
+source-repository head
+  type: git
+  location: https://github.com/githubuser/PracticalHaskell
+
+library
+  exposed-modules:
+      Chapter2.DataTypes
+      Chapter2.DataTypesR
+      Chapter2.Lib
+      Chapter3.Filters
+      Chapter3.Folds
+      Lib
+  other-modules:
+      Paths_PracticalHaskell
+  hs-source-dirs:
+      src
+  build-depends:
+      base >=4.7 && <5
+      , containers
+      , persistent
+  default-language: Haskell2010
+
+executable PracticalHaskell-exe
+  main-is: Main.hs
+  other-modules:
+      Paths_PracticalHaskell
+  hs-source-dirs:
+      app
+  ghc-options: -threaded -rtsopts -with-rtsopts=-N
+  build-depends:
+      PracticalHaskell
+    , base >=4.7 && <5
+    , containers
+    , persistent
+  default-language: Haskell2010
+
+test-suite PracticalHaskell-test
+  type: exitcode-stdio-1.0
+  main-is: Spec.hs
+  other-modules:
+      Paths_PracticalHaskell
+  hs-source-dirs:
+      test
+  ghc-options: -threaded -rtsopts -with-rtsopts=-N
+  build-depends:
+      PracticalHaskell
+    , base >=4.7 && <5
+    , containers
+    , persistent
+  default-language: Haskell2010
