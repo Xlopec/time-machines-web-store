@@ -4,14 +4,14 @@ module Chapter3.Filters where
 import Chapter2.DataTypes
 
 filterOnes :: [Int] -> [Int]
-filterOnes l = filter (\x -> x == 1) l
+filterOnes = filter (== 1)
 
-filterANumber :: (Num a, Eq a) => [a] -> a -> [a]
-filterANumber l n = filter (\x -> x == n) l
+filterANumber :: (Num a, Eq a) => a -> [a] -> [a]
+filterANumber n = filter (== n)
 
-filterNot :: Eq a => [a] -> a -> [a]
-filterNot l n = filter (\x -> not $ x == n) l
+filterNot :: Eq a => a -> [a] -> [a]
+filterNot n = filter (/= n)
 
 filterGovOrgs :: [Client] -> [Client]
-filterGovOrgs l = filter (\case GovOrg _ -> True
-                                _ -> False) l
+filterGovOrgs = filter (\case GovOrg _ -> True
+                              _ -> False)

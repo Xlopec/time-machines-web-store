@@ -13,7 +13,7 @@ product2 = foldl (*)
 
 data InfClient
   = MinusInf
-  | ClientInf ClientR
+  | ClientInf Client
   | PlusInf deriving Show
 
 shortest :: InfClient -> InfClient -> InfClient
@@ -21,14 +21,14 @@ shortest MinusInf b = b
 shortest a MinusInf = a
 shortest PlusInf _ = PlusInf
 shortest _ PlusInf = PlusInf
-shortest a@(ClientInf c1) b@(ClientInf c2) | length (clientRName c1) > length (clientRName c2) = b
+shortest a@(ClientInf c1) b@(ClientInf c2) | length (clientRName c1) > length (clientName c2) = b
 shortest a _ = a
 
-minimumClient1 :: [ClientR] -> InfClient -> InfClient
+minimumClient1 :: [Client] -> InfClient -> InfClient
 minimumClient1 [] current = current
 minimumClient1 (x:xs) current = minimumClient1 xs (shortest (ClientInf x) current)
 
-minimumClient2 :: InfClient -> [ClientR] -> InfClient
+minimumClient2 :: InfClient -> [Client] -> InfClient
 minimumClient2 = foldl (\x y -> shortest x (ClientInf y) )
 
 all1 :: [Bool] -> Bool
