@@ -2,7 +2,7 @@
 
 module Chapter3.Folds where
 
-import Chapter2.DataTypesR
+import Chapter2.DataTypes
 
 product1 :: Int -> [Int] -> Int
 product1 acc (x:xs) = product1 (acc * x) xs
@@ -21,7 +21,7 @@ shortest MinusInf b = b
 shortest a MinusInf = a
 shortest PlusInf _ = PlusInf
 shortest _ PlusInf = PlusInf
-shortest a@(ClientInf c1) b@(ClientInf c2) | length (clientRName c1) > length (clientName c2) = b
+shortest a@(ClientInf c1) b@(ClientInf c2) | length (clientName c1) > length (clientName c2) = b
 shortest a _ = a
 
 minimumClient1 :: [Client] -> InfClient -> InfClient

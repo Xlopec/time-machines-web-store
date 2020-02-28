@@ -5,6 +5,14 @@ data BinaryTree a
   | Leaf
   deriving (Show)
 
+instance Functor BinaryTree where
+  fmap f (Node v l r) = Node (f v) (fmap f l) (fmap f r)
+  fmap _ Leaf = Leaf
+
+instance Foldable BinaryTree where
+  foldMap f (Node v l r) = f v <> foldMap f l <> foldMap f r
+  foldMap _ Leaf = mempty
+
 treeFind :: Ord a => a -> BinaryTree a -> Maybe a
 treeFind t (Node v l r) =
   case compare t v of
@@ -22,9 +30,8 @@ treeInsert t n@(Node v l r) =
 treeInsert t Leaf = Node t Leaf Leaf
 
 treeConcat :: Ord a => BinaryTree a -> BinaryTree a -> BinaryTree a
-treeConcat x y = foldl (flip treeInsert) x $ collect y
-                 where collect (Node v l r) = v : collect l ++ collect r
-                       collect Leaf = []
+treeConcat x (Node v l r) = treeConcat (treeConcat (treeInsert v x) l) r
+treeConcat x Leaf = x
 
 testTree :: BinaryTree Int
 testTree = Node 7 (Node 4 (Node 2 Leaf Leaf) (Node 5 Leaf Leaf)) (Node 11 (Node 8 Leaf Leaf) (Node 12 Leaf Leaf))
